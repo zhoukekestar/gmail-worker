@@ -1,7 +1,7 @@
 name = "gmail-worker"
 main = "src/index.mjs"
 compatibility_date = "2022-12-20"
-
+compatibility_flags = [ "nodejs_compat" ]
 
 [[kv_namespaces]]
 binding = "gmail-worker-kv"
