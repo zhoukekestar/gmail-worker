@@ -66,9 +66,9 @@ async function getToken ({ clientId, code, redirectUri, codeVerifier, clientSecr
     body: new URLSearchParams(values).toString(),
     // data: querystring.stringify(values),
     headers
-  })
+  }).then(d => d.json())
 
-  console.log(res)
+  console.log("token_result: ", JSON.stringify(res))
   return res;
   // const tokens = res.data
 }
