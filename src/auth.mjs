@@ -1,4 +1,4 @@
-// import { getEnv } from './env.mjs'
+
 export default async ({ env }) => {
   let message = `<h1>hello</h1>`
 //   const env = getEnv()
