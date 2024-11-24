@@ -7,6 +7,7 @@ export default async ({ req, env }) => {
 
   const headers = {
     // 'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/json',
     'x-goog-api-client': 'gdcl/7.2.0 gl-node/18.18.2',
     'Accept-Encoding': 'gzip',
     'User-Agent': 'google-api-nodejs-client/7.2.0 (gzip)',
@@ -41,11 +42,13 @@ export default async ({ req, env }) => {
     raw: encodedMessage,
   }
   const res = await fetch(
-    'https://gmail.googleapis.com/upload/gmail/v1/users/me/messages/send',
+    'https://gmail.googleapis.com/gmail/v1/users/me/messages/send',
     {
       method: 'POST',
       headers,
-      body: encodedMessage,
+      body: JSON.stringify({
+        raw: encodedMessage
+      }),
       // body: new URLSearchParams(values).toString()
     }
   ).then(d => d.text())
