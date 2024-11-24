@@ -25,6 +25,7 @@ export default async ({ req, env }) => {
 
   // 保存 token
   if (tokens.access_token) {
+    tokens.updated = new Date().toISOString();
     await kv.put('credentials', JSON.stringify(tokens))
     return new Response('auth success!')
   } else {

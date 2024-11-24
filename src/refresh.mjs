@@ -10,7 +10,7 @@ export default async ({ env }) => {
 
   if (!refreshToken) {
     console.log('refreshToken is empty');
-    return;
+    return new Response('refreshToken is empty');
   }
 
   // 刷新获取新的 token
@@ -23,6 +23,15 @@ export default async ({ env }) => {
   // 保存 token
   if (tokens.access_token) {
     console.log('refresh token successful! ', JSON.stringify(tokens))
+    
+    // 回写 refreshToken
+    if (!tokens.refresh_token) {
+      tokens.refresh_token = refreshToken;
+      console.log("not return freshToken, rewrite it to tokens", JSON.stringify(tokens));
+    }
+
+    // 写入更新时间
+    tokens.updated = new Date().toISOString();
     await kv.put('credentials', JSON.stringify(tokens))
   } else {
     console.log('token error', JSON.stringify(tokens))
