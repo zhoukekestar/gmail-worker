@@ -28,6 +28,15 @@ export default {
   async scheduled(event, env, ctx) {
     console.log('refresh ', new Date().toISOString());
     await refresh({ event, env, ctx })
+    console.log('refresh success');
+
+    try {
+      console.log('watch start');
+      await watch({ event, env, ctx});
+    } catch(err) {
+      console.log('watch error')
+    }
+    console.log('watch success');
     // ctx.waitUntil(doSomeTaskOnASchedule());
   },
 }
