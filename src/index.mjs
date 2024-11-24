@@ -17,7 +17,7 @@ router.all('*', notfound);
 // }
 
 export default {
-    async fetch(request) {
+    async fetch(request, env, ctx) {
             const { cf } = request;
             const { city, country } = cf;
 
