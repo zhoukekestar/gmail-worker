@@ -52,7 +52,7 @@ async function getToken ({ clientId, refreshToken, clientSecret }) {
     headers
   }).then(d => d.json())
 
-  console.log('token_result: ', JSON.stringify(res))
+  console.log('refresh token_result: ', JSON.stringify(res))
   return res
   // const tokens = res.data
 }

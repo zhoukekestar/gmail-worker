@@ -20,7 +20,8 @@ export default {
     return router.handle(request, env, ctx)
   },
   async scheduled(event, env, ctx) {
-    console.log('refresh')
+    console.log('refresh ', new Date().toISOString());
+    refresh({ event, env, ctx })
     // ctx.waitUntil(doSomeTaskOnASchedule());
   },
 }
