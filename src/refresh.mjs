@@ -1,30 +1,35 @@
-import { localClientId, localClientSecret, redirectUri } from './const.mjs'
-import base64js from 'base64-js'
-// import crypto from 'node:crypto'
+import { TOKEN_URL } from './const.mjs'
 
-const TOKEN_URL = 'https://oauth2.googleapis.com/token'
-
-// https://gmail-worker.zhoukekestar.workers.dev/oauth2callback
-export default async ({ req, env }) => {
+export default async ({ env }) => {
   // 初始化 authclient
   const kv = env['gmail-worker-kv']
-  const clientId = (await kv.get('clientId')) || localClientId
-  const clientSecret = (await kv.get('clientSecret')) || localClientSecret
+  const clientId = (await kv.get('clientId'))
+  const clientSecret = (await kv.get('clientSecret'))
   const credentials = JSON.parse(await kv.get('credentials'))
   const refreshToken = credentials.refresh_token
 
-  const tokens = await getToken({
+  if (!refreshToken) {
+    console.log('refreshToken is empty');
+    return;
+  }
+
+  // 刷新获取新的 token
+  const tokens = await refreshTokenRequest({
     clientId,
     clientSecret,
     refreshToken
   })
 
-  await kv.put('credentials', JSON.stringify(tokens))
-
-  return new Response('hi')
+  // 保存 token
+  if (tokens.access_token) {
+    console.log('refresh token successful! ', JSON.stringify(tokens))
+    await kv.put('credentials', JSON.stringify(tokens))
+  } else {
+    console.log('token error', JSON.stringify(tokens))
+  }
 }
 
-async function getToken ({ clientId, refreshToken, clientSecret }) {
+async function refreshTokenRequest ({ clientId, refreshToken, clientSecret }) {
   const headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'User-Agent': 'google-api-nodejs-client/9.15.0',
@@ -44,15 +49,12 @@ async function getToken ({ clientId, refreshToken, clientSecret }) {
     headers
   )
   const res = await fetch(TOKEN_URL, {
-    // ...OAuth2Client.RETRY_CONFIG,
     method: 'POST',
     // url,
     body: new URLSearchParams(values).toString(),
-    // data: querystring.stringify(values),
     headers
   }).then(d => d.json())
 
   console.log('refresh token_result: ', JSON.stringify(res))
   return res
-  // const tokens = res.data
 }

@@ -1,29 +1,29 @@
-// import { OAuth2Client } from 'google-auth-library'
-import { localClientId, redirectUri } from './const.mjs'
+import { REDIRECT_URI } from './const.mjs'
 
 export default async ({ env }) => {
   const kv = env['gmail-worker-kv']
-  const clientId = await kv.get('clientId') || localClientId;
-  // const clientSecret = await kv.get('clientSecret')
-  // const client = new OAuth2Client(clientId, clientSecret)
-
-  // const authorizeUrl = client.generateAuthUrl({
-  //   redirect_uri: redirectUri,
-  //   prompt: 'consent',
-  //   access_type: 'offline',
-  //   scope: ['https://www.googleapis.com/auth/gmail.readonly'].join(' ')
-  // })
+  const clientId = await kv.get('clientId')
 
   const query = {
-    redirect_uri: redirectUri,
+    redirect_uri: REDIRECT_URI,
     prompt: 'consent',
     access_type: 'offline',
-    scope: ['https://www.googleapis.com/auth/gmail.readonly'].join(' '),
+    scope: [
+      'https://mail.google.com/',
+      'https://www.googleapis.com/auth/gmail.metadata',
+      'https://www.googleapis.com/auth/gmail.modify',
+      'https://www.googleapis.com/auth/gmail.readonly'
+    ].join(' '),
     response_type: 'code',
-    client_id: clientId,
+    client_id: clientId
   }
-  const authorizeUrl = `https://accounts.google.com/o/oauth2/v2/auth?${new URLSearchParams(query).toString()}`;
 
+  // 拼接 google 授权路径
+  const authorizeUrl = `https://accounts.google.com/o/oauth2/v2/auth?${new URLSearchParams(
+    query
+  ).toString()}`
+
+  // 302 跳转
   const statusCode = 302
   return Response.redirect(authorizeUrl, statusCode)
 }
