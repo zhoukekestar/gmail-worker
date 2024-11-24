@@ -47,7 +47,7 @@ async function getToken ({ clientId, code, redirectUri, codeVerifier, clientSecr
   }
   const values = {
     client_id: clientId,
-    code_verifier: codeVerifier,
+    // code_verifier: codeVerifier,
     code: code,
     grant_type: 'authorization_code',
     redirect_uri: redirectUri,
