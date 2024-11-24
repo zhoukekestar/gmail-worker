@@ -6,7 +6,7 @@ export default async ({ req, env }) => {
   const credentials = JSON.parse(await kv.get('credentials'))
 
   const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    // 'Content-Type': 'application/x-www-form-urlencoded',
     'x-goog-api-client': 'gdcl/7.2.0 gl-node/18.18.2',
     'Accept-Encoding': 'gzip',
     'User-Agent': 'google-api-nodejs-client/7.2.0 (gzip)',
