@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm i",
+    "dev": "wrangler dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@tsndr/cloudflare-worker-router": "^3.2.10",
+    "base64-js": "^1.5.1",
     "google-auth-library": "^9.15.0",
     "itty-router": "^5.0.18",
     "wrangler": "^3.90.0"
