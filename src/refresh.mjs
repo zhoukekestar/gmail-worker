@@ -27,6 +27,7 @@ export default async ({ env }) => {
   } else {
     console.log('token error', JSON.stringify(tokens))
   }
+  return new Response('refresh ok!');
 }
 
 async function refreshTokenRequest ({ clientId, refreshToken, clientSecret }) {

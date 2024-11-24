@@ -23,7 +23,7 @@ export default {
   },
   async scheduled(event, env, ctx) {
     console.log('refresh ', new Date().toISOString());
-    refresh({ event, env, ctx })
+    await refresh({ event, env, ctx })
     // ctx.waitUntil(doSomeTaskOnASchedule());
   },
 }
