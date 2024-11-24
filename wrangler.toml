@@ -1,0 +1,8 @@
+name = "gmail-worker"
+main = "src/index.mjs"
+compatibility_date = "2022-12-20"
+
+
+[[kv_namespaces]]
+binding = "gmail-worker"
+id = "db3ab971d2c749df91e0d3c1d188f702"
