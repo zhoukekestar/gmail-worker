@@ -27,7 +27,7 @@ export default async ({ req, env }) => {
 
   const codeVerifier = await generateCodeVerifierAsync();
 
-  kv.put("codeVerifier", JSON.stringify(codeVerifier));
+  await kv.put("codeVerifier", JSON.stringify(codeVerifier));
   const tokens = await getToken({
     clientId,
     clientSecret,
