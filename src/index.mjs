@@ -5,6 +5,7 @@ import auth from './auth.mjs'
 import list from './list.mjs';
 import refresh from './refresh.mjs';
 import oauth2callback from './oauth2callback.mjs'
+import gmailInboxWebhook from './gmailInboxWebhook.mjs'
 
 const router = new Router()
 
@@ -13,6 +14,7 @@ router.get("/auth", auth);
 router.get("/oauth2callback", oauth2callback);
 router.get("/list", list);
 router.get("/refresh", refresh);
+router.get("/gmail-inbox-webhook", gmailInboxWebhook);
 
 
 export default {
