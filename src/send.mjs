@@ -41,7 +41,7 @@ export default async ({ req, env }) => {
     raw: encodedMessage,
   }
   const res = await fetch(
-    'https://gmail.googleapis.com/gmail/v1/users/me/messages/send',
+    'https://gmail.googleapis.com/upload/gmail/v1/users/me/messages/send',
     {
       method: 'POST',
       headers,
