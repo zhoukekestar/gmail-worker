@@ -45,7 +45,8 @@ export default async ({ req, env }) => {
     {
       method: 'POST',
       headers,
-      body: new URLSearchParams(values).toString()
+      body: encodedMessage,
+      // body: new URLSearchParams(values).toString()
     }
   ).then(d => d.text())
 
