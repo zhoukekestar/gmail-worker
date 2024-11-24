@@ -25,11 +25,14 @@ export default async ({ req, env }) => {
   //   redirect_uri: redirectUri,
   // })
 
+  const codeVerifier = await generateCodeVerifierAsync();
+
+  kv.put("codeVerifier", JSON.stringify(codeVerifier));
   const tokens = await getToken({
     clientId,
     clientSecret,
     redirectUri,
-    codeVerifier: await generateCodeVerifierAsync(),
+    codeVerifier: codeVerifier.codeVerifier,
     code,
   })
 
