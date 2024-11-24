@@ -44,7 +44,9 @@ export default async ({ req, env }) => {
 
 async function getToken ({ clientId, code, redirectUri, codeVerifier, clientSecret }) {
   const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded'
+    "Content-Type": "application/x-www-form-urlencoded",
+    "User-Agent": "google-api-nodejs-client/9.15.0",
+    "x-goog-api-client": "gl-node/18.18.2",
   }
   const values = {
     client_id: clientId,
