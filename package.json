@@ -1,0 +1,17 @@
+{
+  "name": "gmail-worker",
+  "version": "1.0.0",
+  "description": "cloudflare worker for gmail",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm i",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "itty-router": "^5.0.18",
+    "wrangler": "^3.90.0"
+  }
+}
