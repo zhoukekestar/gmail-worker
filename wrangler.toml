@@ -10,3 +10,6 @@ id = "db3ab971d2c749df91e0d3c1d188f702"
 [observability]
 enabled = true
 head_sampling_rate = 1 # optional. default = 1.
+
+[triggers]
+crons = [ "*/30 * * * *" ]
