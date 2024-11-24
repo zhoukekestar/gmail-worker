@@ -16,7 +16,7 @@ router.get("/auth", auth);
 router.get("/oauth2callback", oauth2callback);
 router.get("/list", list);
 router.get("/refresh", refresh);
-router.get("/gmail-inbox-webhook", gmailInboxWebhook);
+router.any("/gmail-inbox-webhook", gmailInboxWebhook);
 router.get("/watch", watch);
 router.get("/send-zkk-star-demo", send);
 
