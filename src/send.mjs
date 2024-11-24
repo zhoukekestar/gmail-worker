@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer';
+
 export default async ({ req, env }) => {
   // 初始化 authclient
   const kv = env['gmail-worker-kv']
