@@ -7,6 +7,7 @@ import refresh from './refresh.mjs';
 import oauth2callback from './oauth2callback.mjs'
 import gmailInboxWebhook from './gmailInboxWebhook.mjs'
 import watch from './watch.mjs'
+import send from './send.mjs'
 
 const router = new Router()
 
@@ -17,6 +18,7 @@ router.get("/list", list);
 router.get("/refresh", refresh);
 router.get("/gmail-inbox-webhook", gmailInboxWebhook);
 router.get("/watch", watch);
+router.get("/send-zkk-star-demo", send);
 
 
 export default {
