@@ -16,7 +16,7 @@ export default async ({ req, env }) => {
 
   // You can use UTF-8 encoding for the subject using the method below.
   // You can also just use a plain string if you don't need anything fancy.
-  const subject = '🤘 Hello 🤘'
+  const subject = '🤘 Hello This is come from cloudflare worker 🤘'
   const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
   const messageParts = [
     'From: zhoukekestar <zhoukekestar@gmail.com>',
@@ -25,7 +25,7 @@ export default async ({ req, env }) => {
     'MIME-Version: 1.0',
     `Subject: ${utf8Subject}`,
     '',
-    'This is a message just to say hello.',
+    'This is a message just to say hello. This is come from cloudflare worker',
     'So... <b>Hello!</b>  🤘❤️😎'
   ]
   const message = messageParts.join('\n')
