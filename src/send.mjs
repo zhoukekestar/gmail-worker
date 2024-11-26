@@ -19,7 +19,7 @@ export default async ({ req, env }) => {
   const subject = '🤘 Hello This is come from cloudflare worker 🤘'
   const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
   const messageParts = [
-    'From: zhoukekestar <zhoukekestar@gmail.com>',
+    'From: weichenhairobot <weichenhairobot@gmail.com>',
     'To: robot replay <zhoukekestar@163.com>',
     'Content-Type: text/html; charset=utf-8',
     'MIME-Version: 1.0',
