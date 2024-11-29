@@ -17,6 +17,10 @@ export default async ({ req, env }) => {
     return new Response('NOTHING TODO');
   }
 
+  if (from.indexOf('weichenhairobot') > -1) {
+    return new Response('NOTHING TODO'); 
+  }
+
   const { text, from, to } = lastMessage;
 
   console.log('last ' + from + to + text);
