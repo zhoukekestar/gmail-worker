@@ -46,8 +46,8 @@ async function refreshAndGetToken (kv, credentials) {
     }
 
     // 过期时间，提前一分钟刷新，避免以为没过期，但过期的情况
-    token.expired = Date.now() + token.expires_in * 1000 - 1000 * 60;
-    token.expired_iso_time = new Date(token.expired).toISOString();
+    tokens.expired = Date.now() + tokens.expires_in * 1000 - 1000 * 60;
+    tokens.expired_iso_time = new Date(tokens.expired).toISOString();
     
     // 写入更新时间
     tokens.updated_iso_time = new Date().toISOString()
