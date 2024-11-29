@@ -18,6 +18,7 @@ export default async ({ req, env }) => {
   }
 
   if (from.indexOf('weichenhairobot') > -1) {
+    console.log('myself');
     return new Response('NOTHING TODO'); 
   }
 
