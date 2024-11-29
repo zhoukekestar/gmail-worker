@@ -10,7 +10,14 @@ export default async ({ req, env }) => {
   }
 
   // 获取最新的邮件
-  const { text, from, to } = await fetchLastMessage(env);
+  const lastMessage = await fetchLastMessage(env);
+
+  if (!lastMessage) {
+    console.log('all readed');
+    return new Response('NOTHING TODO');
+  }
+
+  const { text, from, to } = lastMessage;
 
   console.log('last ' + from + to + text);
 
@@ -32,9 +39,12 @@ async function fetchLastMessage (env) {
   
   const list = await fetchWithToken(
     env,
-    'https://gmail.googleapis.com/gmail/v1/users/me/messages'
+    'https://gmail.googleapis.com/gmail/v1/users/me/messages?q=is:unread&labelIds=INBOX'
   )
   const lastMessageId = list?.messages[0]?.id
+
+  if (!lastMessageId) return null;
+
   const msg = await fetchWithToken(
     env,
     `https://gmail.googleapis.com/gmail/v1/users/me/messages/${lastMessageId}`
