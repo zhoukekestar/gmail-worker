@@ -32,7 +32,7 @@ async function fetchLastMessage (env) {
   
   const list = await fetchWithToken(
     env,
-    'https://gmail.googleapis.com/gmail/v1/users/me/messages?labelIds=Label_5193471176394763511'
+    'https://gmail.googleapis.com/gmail/v1/users/me/messages'
   )
   const lastMessageId = list?.messages[0]?.id
   const msg = await fetchWithToken(
