@@ -7,5 +7,5 @@ export default async ({ req, env }) => {
   )
 
   res.fetchWithToken = true
-  return new Response(res)
+  return new Response(JSON.stringify(res))
 }
