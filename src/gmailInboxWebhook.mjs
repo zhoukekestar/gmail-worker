@@ -17,14 +17,13 @@ export default async ({ req, env }) => {
     return new Response('NOTHING TODO');
   }
 
-  if (from.indexOf('weichenhairobot') > -1) {
-    console.log('myself');
-    return new Response('NOTHING TODO'); 
-  }
-
-  const { text, from, to } = lastMessage;
+  const { text, from, to, messageId } = lastMessage;
 
   console.log('last ' + from + to + text);
+
+  const read = await markAsRead(env, messageId);
+
+  console.log('mark read ', read);
 
   // AI 回复
   const responseText = await getGeminiResponse(APIKEY, text);
@@ -46,7 +45,7 @@ async function fetchLastMessage (env) {
     env,
     'https://gmail.googleapis.com/gmail/v1/users/me/messages?q=is:unread&labelIds=INBOX'
   )
-  const lastMessageId = list?.messages[0]?.id
+  const lastMessageId = list?.messages?.[0]?.id
 
   if (!lastMessageId) return null;
 
@@ -58,7 +57,13 @@ async function fetchLastMessage (env) {
   const from = msg.payload.headers.find(t => t.name == 'From').value
   const to = msg.payload.headers.find(t => t.name == 'To').value
 
-  return { text, from, to }
+  // 避免死循环，自己和自己对话
+  if (from.indexOf('weichenhairobot') > -1) {
+    console.log('from myself');
+    return null;
+  }
+
+  return { text, from, to, messageId }
 }
 
 /**
@@ -107,6 +112,24 @@ async function sendEmail (env, from, to, text) {
     {
       body: JSON.stringify({
         raw: encodedMessage
+      })
+    }
+  )
+
+  return res
+}
+
+
+
+async function markAsRead (env, id) {
+
+  const res = await postWithToken(
+    env,
+    `https://gmail.googleapis.com/gmail/v1/users/me/messages/${id}/modify`,
+    {
+      body: JSON.stringify({
+        addLabelIds: [],
+        removeLabelIds: ['UNREAD']
       })
     }
   )
