@@ -63,7 +63,7 @@ async function fetchLastMessage (env) {
     return null;
   }
 
-  return { text, from, to, messageId }
+  return { text, from, to, messageId: lastMessageId }
 }
 
 /**
