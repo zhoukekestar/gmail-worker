@@ -1,5 +1,6 @@
 import { fetchWithToken, postWithToken } from './utils.mjs'
 import { GoogleGenerativeAI } from './ai-sdk.mjs'
+import { marked } from 'marked';
 
 export default async ({ req, env }) => {
   console.log('push webhook start!')
@@ -31,7 +32,7 @@ export default async ({ req, env }) => {
   console.log('response ' + responseText);
 
   // 发送邮件
-  const res = await sendEmail(env, to, from, responseText)
+  const res = await sendEmail(env, to, from, marked(responseText))
 
   console.log('res ', res)
   // 返回结果

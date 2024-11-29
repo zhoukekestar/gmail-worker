@@ -16,6 +16,7 @@
     "base64-js": "^1.5.1",
     "google-auth-library": "^9.15.0",
     "itty-router": "^5.0.18",
+    "marked": "^15.0.3",
     "wrangler": "^3.90.0"
   }
 }
