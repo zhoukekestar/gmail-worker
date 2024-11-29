@@ -12,12 +12,17 @@ export default async ({ req, env }) => {
   // 获取最新的邮件
   const { text, from, to } = await fetchLastMessage(env);
 
+  console.log('last ' + from + to + text);
+
   // AI 回复
   const responseText = await getGeminiResponse(APIKEY, text);
+
+  console.log('response ' + responseText);
 
   // 发送邮件
   const res = await sendEmail(env, to, from, responseText)
 
+  console.log('res ', res)
   // 返回结果
   return new Response(JSON.stringify(res));
 }
