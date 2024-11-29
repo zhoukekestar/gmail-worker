@@ -46,9 +46,9 @@ async function refreshAndGetToken (kv, credentials) {
     }
 
     // 过期时间，提前一分钟刷新，避免以为没过期，但过期的情况
-    tokens.expired = Date.now() + tokens.expires_in * 1000 - 1000 * 60;
-    tokens.expired_iso_time = new Date(tokens.expired).toISOString();
-    
+    tokens.expired = Date.now() + tokens.expires_in * 1000 - 1000 * 60
+    tokens.expired_iso_time = new Date(tokens.expired).toISOString()
+
     // 写入更新时间
     tokens.updated_iso_time = new Date().toISOString()
 
@@ -56,7 +56,7 @@ async function refreshAndGetToken (kv, credentials) {
     await kv.put('credentials', JSON.stringify(tokens))
     return tokens.access_token
   }
-  
+
   throw new Error('no access_token found!')
 }
 
@@ -69,6 +69,22 @@ export const fetchWithToken = async (env, url, opts) => {
   }
 
   return await fetch(url, {
+    headers,
+    ...opts
+  }).then(d => d.json())
+}
+
+export const postWithToken = async (env, url, opts) => {
+  const token = await getToken(env)
+
+  const headers = {
+    ...DEFAULT_HEADERS,
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  }
+
+  return await fetch(url, {
+    method: 'POST',
     headers,
     ...opts
   }).then(d => d.json())
