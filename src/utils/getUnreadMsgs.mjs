@@ -18,14 +18,15 @@ export default async env => {
       `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}`
     )
 
+    const pmsg = parseMessage(response)
+    console.log('parsedmsg', pmsg)
+
     // 避免死循环，自己和自己对话
-    if (from.indexOf('weichenhairobot@gmail.com') > -1) {
+    if (pmsg.from.indexOf('weichenhairobot@gmail.com') > -1) {
       console.log('from myself')
       continue
     }
 
-    const pmsg = parseMessage(response);
-    console.log('parsedmsg', pmsg);
     parsedMessages.push(pmsg)
   }
 
