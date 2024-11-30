@@ -1,5 +1,8 @@
 import { TOKEN_URL, DEFAULT_HEADERS } from '../const.mjs'
 
+// import { ProxyAgent } from 'undici'
+// let dispatcher = new ProxyAgent('http://127.0.0.1:1088');
+
 export const getToken = async env => {
   // 初始化 authclient
   const kv = env['gmail-worker-kv']

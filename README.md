@@ -9,6 +9,10 @@ $ curl -v http://gmail-worker.zhoukekestar.workers.dev/hello --resolve gmail-wor
 
 https://gmail-worker.zhoukekestar.workers.dev/auth
 
+# local dev
+
+npx wrangler kv:key put --binding=gmail-worker-kv --local "aaa" "xxx"
+
 # References
 
 * gmail api: https://developers.google.com/gmail/api/quickstart/nodejs?hl=zh-cn
