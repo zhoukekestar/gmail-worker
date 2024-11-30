@@ -1,4 +1,4 @@
-import { TOKEN_URL, DEFAULT_HEADERS } from './const.mjs'
+import { TOKEN_URL, DEFAULT_HEADERS } from '../const.mjs'
 
 export const getToken = async env => {
   // 初始化 authclient

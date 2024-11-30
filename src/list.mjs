@@ -1,4 +1,4 @@
-import { fetchWithToken } from './utils.mjs'
+import { fetchWithToken } from './utils/request.mjs'
 
 export default async ({ req, env }) => {
   const res = await fetchWithToken(
