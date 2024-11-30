@@ -25,6 +25,8 @@ export default json => {
     to: mailJson.headers.to,
     id: mailJson.id,
     historyId: mailJson.historyId,
-    threadId: mailJson.threadId
+    threadId: mailJson.threadId,
+    inReplyTo: mailJson.headers['in-reply-to'],
+    references: mailJson.headers.references
   }
 }

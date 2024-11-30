@@ -29,7 +29,7 @@ export default async ({ req, env }) => {
     console.log('response ' + responseText)
 
     // 发送邮件
-    const res = await sendMail(env, to, from, marked(responseText))
+    const res = await sendMail(env, to, from, marked(responseText), unreads[i])
 
     console.log('res ', res)
   }
