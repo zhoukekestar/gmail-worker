@@ -1,7 +1,7 @@
 import { postWithToken } from './request.mjs'
 
-export default async (env, from, to, text, message) => {
-  const { inReplyTo, references, subject } = message
+export default async (env, from, to, text, mail) => {
+  const { inReplyTo, references, subject } = mail
 
   // You can also just use a plain string if you don't need anything fancy.
   const utf8Subject = `=?utf-8?B?${Buffer.from(`RE:${subject || "Auto Reply"}`).toString(
