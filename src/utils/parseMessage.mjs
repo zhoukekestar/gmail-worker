@@ -21,8 +21,8 @@ export default json => {
 
   return {
     text: text.trim(),
-    from: mailJson.from,
-    to: mailJson.to,
+    from: mailJson.headers.from,
+    to: mailJson.headers.to,
     id: mailJson.id,
     historyId: mailJson.historyId,
     threadId: mailJson.threadId

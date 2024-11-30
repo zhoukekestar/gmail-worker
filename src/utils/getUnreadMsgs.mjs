@@ -24,7 +24,9 @@ export default async env => {
       continue
     }
 
-    parsedMessages.push(parseMessage(response))
+    const pmsg = parseMessage(response);
+    console.log('parsedmsg', pmsg);
+    parsedMessages.push(pmsg)
   }
 
   return parsedMessages
