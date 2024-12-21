@@ -12,4 +12,4 @@ enabled = true
 head_sampling_rate = 1 # optional. default = 1.
 
 [triggers]
-crons = [ "* */12 * * *" ]
+crons = [ "0 */12 * * *" ]
