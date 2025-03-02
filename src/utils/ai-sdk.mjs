@@ -391,7 +391,10 @@ async function makeRequest(url, fetchOptions, fetchFn = fetch) {
         if (process.env.http_proxy) {
             agent = new HttpsProxyAgent(process.env.http_proxy);
         }
-        response = await fetchFn(url, fetchOptions, agent);
+        response = await fetchFn(url, {
+            ...fetchOptions,
+            agent
+        });
     }
     catch (e) {
         handleResponseError(e, url);
