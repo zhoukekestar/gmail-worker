@@ -28,7 +28,8 @@ export default {
 
     try {
       console.log('watch refresh');
-      await watch({ event, env, ctx});
+      const res = await watch({ event, env, ctx});
+      console.log("watch result" + JSON.stringify(res));
     } catch(err) {
       console.log('watch error')
     }
