@@ -25,5 +25,6 @@ export default async ({ req, env }) => {
     }
   ).then(d => d.text())
 
+  console.log('watch result' + res);
   return new Response(res)
 }

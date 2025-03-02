@@ -8,7 +8,9 @@ import { GoogleGenerativeAI } from './ai-sdk.mjs'
 export default async (APIKEY, text) => {
   const genAI = new GoogleGenerativeAI(APIKEY)
 
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+  // https://aistudio.google.com/app/apikey
+  // update model name
+  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
   const result = await model.generateContent(text)
   const response = await result.response

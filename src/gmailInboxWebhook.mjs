@@ -23,10 +23,16 @@ export default async ({ req, env }) => {
 
     console.log('mark read ', read)
 
-    // AI 回复
-    const responseText = await getGeminiResponse(APIKEY, text)
+    let responseText = '';
+    try {
+      // AI 回复
+      responseText = await getGeminiResponse(APIKEY, text)
 
-    console.log('response ' + responseText)
+      console.log('response ' + responseText)
+    } catch(err) {
+      console.error(err);
+      responseText = 'AI 回复出错：' + JSON.stringify(err);
+    }
 
     // 发送邮件
     const res = await sendMail(env, to, from, marked(responseText), unreads[i])
